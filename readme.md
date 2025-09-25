@@ -16,7 +16,7 @@ If you just want to see the game in action right away:
 
 # Play one quick text-based game with random moves
 
-PYTHONPATH=. python scripts/print_demo.py --games 1 --policy random
+`PYTHONPATH=. python scripts/print_demo.py --games 1 --policy random`
 
 ---
 
