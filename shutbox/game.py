@@ -41,28 +41,36 @@ class Game:
     def score(self) -> int:
         return sum(self.open_tiles())
 
-    def can_use_single_die(self) -> bool:
-        if not self.single_die_rule:
-            return False
-        # Standard rule: once 7–9 are all closed, roll one die
+    def can_choose_die_count(self) -> bool:
+        """
+        Player may choose 1 or 2 dice iff 7, 8 and 9 are all closed (and exist).
+        """
         high = [i for i in (7, 8, 9) if i <= self.tiles_max]
-        return all(not self.tiles.get(i, False) for i in high)
+        return self.single_die_rule and all(not self.tiles.get(i, False) for i in high)
 
     def available_moves(self, target: int) -> List[TileSet]:
         return combos_that_sum(self.open_tiles(), target)
 
     # ---------- actions ----------
-    def roll(self, forced: Optional[int] = None) -> int:
+    def roll(self, *, forced: Optional[int] = None, dice: Optional[int] = None) -> int:
+        """
+        Roll the dice. If 7–9 are closed, 'dice' may be 1 or 2; otherwise forced to 2.
+        If 'forced' is provided, it overrides randomness (useful for tests).
+        """
         if self.over:
             return self.last_roll if self.last_roll is not None else 0
 
+        # determine dice count
+        if self.can_choose_die_count():
+            dcount = 1 if dice == 1 else 2 if dice == 2 else 2
+        else:
+            dcount = 2
+
+        # get result
         if forced is not None:
             r = forced
         else:
-            if self.can_use_single_die():
-                r = self.rng.randint(1, 6)
-            else:
-                r = self.rng.randint(1, 6) + self.rng.randint(1, 6)
+            r = sum(self.rng.randint(1, 6) for _ in range(dcount))
 
         self.last_roll = r
         if not self.available_moves(r):

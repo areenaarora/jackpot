@@ -1,0 +1,6 @@
+pandas
+numpy
+matplotlib
+pytest
+# For Windows users only (needed for curses_demo.py):
+windows-curses; platform_system == "Windows"

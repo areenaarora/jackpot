@@ -1,6 +1,6 @@
 import random
 import pytest
-from game import Game, combos_that_sum
+from shutbox.game import Game, combos_that_sum
 
 
 def new_game(seed=123, tiles_max=9, single=True):
@@ -88,16 +88,33 @@ def test_combos_that_sum_basic():
 
 def test_shut_the_box_scripted_path():
     g = new_game()
-    # Force a short sequence to demonstrate rules consistency
+    # Force a short sequence that closes 7–9, enabling single-die choice
     g.roll(forced=9)
-    assert g.move([4, 5]) is True
+    assert g.move([9]) is True
     g.roll(forced=8)
     assert g.move([8]) is True
     g.roll(forced=7)
     assert g.move([7]) is True
+
     # Now 7–9 are closed, so single-die is legal
-    assert g.can_choose_die_count()
+    assert g.can_choose_die_count() is True
+
+    # Force a 1-die roll of 5 and take a valid move if available
     g.roll(dice=1, forced=5)
-    assert g.move([5]) is True or g.move([2, 3]) or True
-    # We don’t insist on full shutout, only engine coherence
+    legal = [tuple(m) for m in g.available_moves(5)]
+    choice = (
+        (5,)
+        if (5,) in legal
+        else (2, 3)
+        if (2, 3) in legal
+        else (legal[0] if legal else None)
+    )
+
+    if choice is not None:
+        assert g.move(list(choice)) is True
+    else:
+        # No legal move for 5 given current board; that's acceptable here.
+        assert g.over is True or g.score() >= 0
+
+    # Engine sanity
     assert isinstance(g.score(), int)
