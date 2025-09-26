@@ -25,7 +25,6 @@ If you just want to see the game in action right away:
 - [Dependencies](#dependencies)
 - [Project structure](#project-structure)
 - [How to run the game](#how-to-run-the-game)
-- [What’s next](#whats-next-for-this-project)
 
 ---
 
@@ -109,3 +108,7 @@ The project includes a few ways to “play” automatically:
 - Use `--games` to set how many games to play one after another.
 - Use `--speed` to adjust the speed of auto-play (default is 0.8 seconds per step).
 - Use `--manual` to press a key (n or space) for each step instead of auto-playing.
+
+## Disclaimer
+
+_This project was **vibe-coded**!_
