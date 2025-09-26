@@ -57,7 +57,7 @@ Here’s what each file does:
 
 - `scripts/curses_demo.py` — An animated version in the terminal using `curses`. You can watch the tiles flip down as the game progresses, scroll through the log, or even step through moves manually.
 
-### Strategies (Policies)
+## Strategies (Policies)
 
 The project includes a few ways to “play” automatically:
 
@@ -108,6 +108,10 @@ The project includes a few ways to “play” automatically:
 - Use `--games` to set how many games to play one after another.
 - Use `--speed` to adjust the speed of auto-play (default is 0.8 seconds per step).
 - Use `--manual` to press a key (n or space) for each step instead of auto-playing.
+
+## What's next?
+
+Working on a way to visualize this so it can be slotted on my website!
 
 ## Disclaimer
 
