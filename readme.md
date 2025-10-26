@@ -1,4 +1,4 @@
-# Shut the Box: Recreated with Python!
+# Shut the Box: Recreated with Python
 
 ## Description
 
@@ -37,7 +37,7 @@ This project uses only a few, commonly used Python libraries:
 - **matplotlib**
 - **pytest**
 
-If you want to install everything at once:
+To install everything at once:
 
 `pip install -r requirements.txt`
 
