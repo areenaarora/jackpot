@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Shut the Box — Visual Demo (animated console view)
 --------------------------------------------------

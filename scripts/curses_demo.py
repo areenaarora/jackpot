@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Shut the Box — Curses Demo (log + step mode)
 --------------------------------------------
